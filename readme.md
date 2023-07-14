@@ -1,2 +1,2 @@
-- Server: [https://book-catalog-server.vercel.app](https://book-catalog-server.vercel.app)
-- Client: [https://book-catalog-client.vercel.app](https://book-catalog-client.vercel.app)
+- server: https://book-catalog-server.vercel.app
+- client: https://book-catalog-client.vercel.app

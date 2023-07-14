@@ -1,9 +1,7 @@
-
-
 const App = () => {
   return (
     <div>
-      Hello
+      <p>hello world</p>
     </div>
   );
 };

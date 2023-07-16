@@ -9,6 +9,8 @@ const Navbar = () => {
     const dispatch = useAppDispatch();
     const handleLogout = () => {
         dispatch(removeLoginUser());
+        localStorage.removeItem('email')
+        localStorage.removeItem('userId')
         swal('success', 'logout successfully!', 'success')
     };
     return (

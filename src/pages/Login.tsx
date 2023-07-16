@@ -17,13 +17,15 @@ const Login = () => {
         setCredentials((prevCredentials) => ({ ...prevCredentials, [name]: value }));
     };
     const [loginUser, { isLoading, isError, isSuccess, error, data }] = useLoginMutation();
-   
+
     const handleLogin = () => {
         loginUser({ data: credentials });
     };
     useEffect(() => {
         if (isSuccess) {
             dispatch(setLoginUser({ email: data.data.email, userId: data.data.id }));
+            localStorage.setItem('email', data.data.email)
+            localStorage.setItem('userId', data.data.id)
         }
     }, [isSuccess, data, dispatch]);
     useEffect(() => {

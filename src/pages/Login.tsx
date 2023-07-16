@@ -17,6 +17,7 @@ const Login = () => {
         setCredentials((prevCredentials) => ({ ...prevCredentials, [name]: value }));
     };
     const [loginUser, { isLoading, isError, isSuccess, error, data }] = useLoginMutation();
+   
     const handleLogin = () => {
         loginUser({ data: credentials });
     };
@@ -42,7 +43,7 @@ const Login = () => {
 
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-            <div className="login-form">
+            <div className="form">
                 <h3 className="mb-4">Login</h3>
                 <ToastContainer />
                 <label>Email</label>
@@ -50,7 +51,7 @@ const Login = () => {
                 <label>Password</label>
                 <input type="password" className="form-control" name="password" value={credentials.password} onChange={handleInputChange} />
                 <button className="btn btn-primary mt-3 w-100" onClick={handleLogin}>Login</button>
-                {isLoading && <button className='btn btn-sm btn-danger w-100 mt-3 fw-bold'>please wait...</button>}
+                {isLoading && <span className='btn btn-sm btn-danger w-100 mt-3 fw-bold'>please wait...</span>}
             </div>
         </div>
     );

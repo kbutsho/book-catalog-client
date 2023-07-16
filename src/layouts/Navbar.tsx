@@ -19,9 +19,9 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav ms-auto">
+                    <div className="navbar-nav ms-auto text-uppercase fw-bold">
                         <Link className="nav-link" to="/">Home</Link>
-                        <Link className="nav-link" to="/books">Books</Link>
+                        <Link className="nav-link" to="/books">All books</Link>
                         {email ? (
                             <>
                                 <span className="nav-link fw-bold text-danger" style={{ cursor: "pointer" }} onClick={handleLogout}>Logout</span>

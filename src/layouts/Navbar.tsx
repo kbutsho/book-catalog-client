@@ -24,7 +24,9 @@ const Navbar = () => {
                         <Link className="nav-link" to="/books">All books</Link>
                         {email ? (
                             <>
+                                <Link className="nav-link " to="/add-book">Add Book</Link>
                                 <span className="nav-link fw-bold text-danger" style={{ cursor: "pointer" }} onClick={handleLogout}>Logout</span>
+
                             </>
                         ) : (
                             <>

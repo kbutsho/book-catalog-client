@@ -5,6 +5,7 @@ const Home = () => {
     const { data, isLoading } = useGetBooksQuery(undefined);
     return (
         <div className="container">
+            <h3 className="fw-bold">Latest Books</h3>
             {isLoading ? (
                 <div className="d-flex justify-content-center align-items-center" style={{ height: "90vh" }}>
                     <h6>Loading...</h6>

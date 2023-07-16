@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import userReducer from './features/user/userSlice';
 import { api } from './api/apiSlice';
 
 
@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     // cart: cartReducer,
     // product: productReducer,
-    // user: userReducer,
+    user: userReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

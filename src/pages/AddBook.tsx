@@ -20,14 +20,11 @@ const AddBook = () => {
     const [bookData, setBookData] = useState({
         title: '', author: '', genre: '', publicationDate: '', image: ''
     });
-
-
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setBookData((data) => ({ ...data, [name]: value }));
     };
     const [savedBook, { isLoading, isError, isSuccess, error, data }] = useAddBookMutation();
-
     const handleSaveBook = () => {
         savedBook(
             {

@@ -5,6 +5,7 @@ import { IBook } from "../types/globalTypes";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
+import { useNavigate } from 'react-router-dom';
 interface RefetchFunction {
     (): void;
 }
@@ -15,6 +16,7 @@ interface TableRowProps {
 }
 const BookList: React.FC<TableRowProps> = ({ book, index, refetch }) => {
     const { userId } = useAppSelector((state) => state.user)
+    const navigate = useNavigate()
     // delete book 
     const [modal, setModal] = useState(false);
     const toggleModal = () => {
@@ -38,7 +40,20 @@ const BookList: React.FC<TableRowProps> = ({ book, index, refetch }) => {
             }
         }
     }, [data, isSuccess, isError])
-    // edit book
+
+    // Details
+    const handelDetails = (id: string) => {
+        navigate(`/book/details/${id}`)
+    }
+    // update book
+
+    const handelUpdateBook = (id: string) => {
+        if (userId) {
+            navigate(`/book/update/${id}`);
+        } else {
+            toast.error('login first!')
+        }
+    }
     return (
         <tr key={book._id}>
             <td>{index + 1}</td>
@@ -48,8 +63,8 @@ const BookList: React.FC<TableRowProps> = ({ book, index, refetch }) => {
             <td>{book.genre}</td>
             <td><img src={book.image} alt="img" style={{ height: "50px" }} /></td>
             <td className="d-flex">
-                <button className="btn btn-primary btn-sm fw-bold">Details</button>
-                <button className="btn btn-success btn-sm fw-bold mx-2 px-3">Edit</button>
+                <button onClick={() => handelDetails(book._id)} className="btn btn-primary btn-sm fw-bold">Details</button>
+                <button onClick={() => handelUpdateBook(book._id)} className="btn btn-success btn-sm fw-bold mx-2">Update</button>
                 <button onClick={toggleModal} className="btn btn-danger btn-sm fw-bold">Delete</button>
             </td>
             {modal ? (

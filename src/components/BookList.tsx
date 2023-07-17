@@ -61,10 +61,11 @@ const BookList: React.FC<TableRowProps> = ({ book, index, refetch }) => {
             <td>{book.author}</td>
             <td>{book.publicationDate.split('T')[0].split('-').reverse().join('/')}</td>
             <td>{book.genre}</td>
-            <td><img src={book.image} alt="img" style={{ height: "50px" }} /></td>
             <td className="d-flex">
+                <button className='btn btn-warning btn-sm fw-bold me-1'>Reading</button>
+                <button className='btn btn-info btn-sm fw-bold me-1'>Wishlist </button>
                 <button onClick={() => handelDetails(book._id)} className="btn btn-primary btn-sm fw-bold">Details</button>
-                <button onClick={() => handelUpdateBook(book._id)} className="btn btn-success btn-sm fw-bold mx-2">Update</button>
+                <button onClick={() => handelUpdateBook(book._id)} className="btn btn-success btn-sm fw-bold mx-1">Update</button>
                 <button onClick={toggleModal} className="btn btn-danger btn-sm fw-bold">Delete</button>
             </td>
             {modal ? (

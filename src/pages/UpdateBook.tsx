@@ -45,7 +45,7 @@ const UpdateBook = () => {
         <div className="container py-5">
             {isLoading ?
                 (
-                    <div className="d-flex justify-content-center align-items-center" style={{ height: "75vh" }}>
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "65vh" }}>
                         <h4 className="fw-bold text-danger">Loading...</h4>
                     </div>
                 ) : (

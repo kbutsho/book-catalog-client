@@ -2,8 +2,8 @@
 
 const NotFound = () => {
     return (
-        <div>
-            not found
+        <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+            <h4 className="fw-bold text-danger">page not found</h4>
         </div>
     );
 };

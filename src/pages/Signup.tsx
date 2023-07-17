@@ -26,7 +26,7 @@ const Signup = () => {
     useEffect(() => {
         if (isSuccess && data) {
             navigate('/login');
-            swal('login here', data.message, 'success');
+            swal(data.message, 'login here...', 'success');
         }
         if (isError) {
             if (error && "data" in error) {

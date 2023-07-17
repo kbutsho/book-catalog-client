@@ -36,10 +36,8 @@ const BookList: React.FC<TableRowProps> = ({ book, index, refetch }) => {
             refetch();
         }
         if (isError) {
-            if (isError) {
-                if (error && "data" in error) {
-                    toast.error((error as any).data.message);
-                }
+            if (error && "data" in error) {
+                toast.error((error as any).data.message);
             }
         }
     }, [data, isSuccess, isError])
@@ -49,7 +47,6 @@ const BookList: React.FC<TableRowProps> = ({ book, index, refetch }) => {
         navigate(`/book/details/${id}`)
     }
     // update book
-
     const handelUpdateBook = (id: string) => {
         if (userId) {
             navigate(`/book/update/${id}`);

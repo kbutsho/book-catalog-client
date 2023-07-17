@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useSingleBookQuery, useUpdateBookMutation } from "../redux/features/books/bookApi";
+import { useSingleBookQuery } from "../redux/features/books/bookApi";
 import { useAddReviewMutation, useGetReviewsQuery } from "../redux/features/reviews/reviewApi";
 import { useState, useEffect } from 'react';
 import { useAppSelector } from "../redux/hook";

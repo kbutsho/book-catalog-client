@@ -4,8 +4,14 @@ export interface IBook {
   author: string;
   genre: string[];
   publicationDate: string;
-  reviews: string[];
   userId: string;
   image: string,
   createdAt: string
+}
+
+export interface IReview {
+  _id: string;
+  bookId: string;
+  userId: string;
+  comment: string
 }

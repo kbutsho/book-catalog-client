@@ -51,7 +51,7 @@ const BookDetails = () => {
                 ) : (
                     <div className="row">
                         <div className="col-md-8">
-                            <img src={book.data.image} alt="img" style={{ width: "200px", height: "300px" }} />
+                            <img src={book.data.image} alt="img" style={{ width: "400px", height: "400px" }} />
                             <h5 className="my-3">Title: {book.data.title}</h5>
                             <h6>Genre: {book.data.genre}</h6>
                             <h6>Author: {book.data.author}</h6>

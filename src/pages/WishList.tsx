@@ -14,7 +14,11 @@ const WishList = () => {
         <div className="container py-5" style={{ minHeight: '75vh' }}>
             <div>
                 <h3 className="fw-bold">Wishlist</h3>
-                <div className="row">
+                {books.length === 0 ? (
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "55vh" }}>
+                        <h4 className="fw-bold text-danger"> no wishlist found</h4>
+                    </div>
+                ) : <div className="row">
                     {books.map((book: IBook) => (
                         <div key={book._id} className="col-md-3">
                             <div style={{
@@ -29,10 +33,10 @@ const WishList = () => {
                                 <h6>Genre: {book.genre}</h6>
                                 <button onClick={() => removeFromWIshList(book)} className="btn btn-danger fw-bold mt-3 w-100">remove from wishlist</button>
                             </div>
-                            <ToastContainer />
                         </div>
                     ))}
-                </div>
+                </div>}
+                <ToastContainer />
             </div>
         </div>
     );

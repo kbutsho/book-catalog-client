@@ -17,7 +17,6 @@ const Login = () => {
         setCredentials((prevCredentials) => ({ ...prevCredentials, [name]: value }));
     };
     const [loginUser, { isLoading, isError, isSuccess, error, data }] = useLoginMutation();
-
     const handleLogin = () => {
         loginUser({ data: credentials });
     };
@@ -27,22 +26,16 @@ const Login = () => {
             localStorage.setItem('email', data.data.email)
             localStorage.setItem('userId', data.data.id)
         }
-    }, [isSuccess, data, dispatch]);
-    useEffect(() => {
         if (email && userId) {
             navigate('/');
             swal('success', data.message, "success")
         }
-    }, [email, userId, navigate]);
-    useEffect(() => {
         if (isError) {
             if (error && "data" in error) {
                 toast.error((error as any).data.message);
             }
         }
-    }, [isError, error]);
-
-
+    }, [isSuccess, data, dispatch, email, userId, navigate, isError, error]);
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
             <div className="form">

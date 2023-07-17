@@ -46,13 +46,12 @@ const AddBook = () => {
                 toast.error((error as any).data.message);
             }
         }
-    }, [isError, error]);
-    useEffect(() => {
         if (isSuccess && data) {
             navigate('/books');
             swal('success', data.message, 'success');
         }
-    })
+    }, [isError, error, isSuccess, data]);
+
     return (
         <div className="container d-flex justify-content-center align-items-center" style={{ height: "85vh" }}>
             <div className="form">

@@ -6,6 +6,8 @@ import { IBook } from "../types/globalTypes";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BookList from '../components/BookList';
+import Slider from "@mui/material/Slider";
+type Range = [number, number];
 
 const Books = () => {
     const { data, isLoading, refetch } = useGetBooksQuery(undefined, { refetchOnMountOrArgChange: true });
@@ -31,6 +33,29 @@ const Books = () => {
             setSelectedGenre(e.target.value);
         }
     }
+
+    //filter by year 
+    const yearRange = data?.data?.map((book: IBook) => Number(book.publicationDate.split('-')[0]));
+    let lowestYear;
+    let highestYear;
+    if (yearRange && yearRange.length > 0) {
+        lowestYear = Math.min(...yearRange);
+        highestYear = Math.max(...yearRange);
+    } else {
+        lowestYear = 0;
+        highestYear = 0;
+    }
+    const [range, setRange] = useState<Range>([lowestYear, highestYear]);
+    function handleChanges(event: any, newValue: number | number[]) {
+        if (Array.isArray(newValue)) {
+            setRange(newValue as Range);
+        }
+        console.log(event);
+    }
+    const filterByYearRange = data?.data?.filter((book: IBook) => {
+        const year = Number(book.publicationDate.split('-')[0]);
+        return year >= range[0] && year <= range[1];
+    });
 
     // search field
     const [book, setBook] = useState('');
@@ -100,6 +125,12 @@ const Books = () => {
                                     </label>
                                 </div>
 
+                                <h5 className='mt-3 fw-bold'>Filter by Publication Year</h5>
+                                <div className='pe-4'>
+                                    <Slider value={range} onChange={handleChanges} valueLabelDisplay="auto" min={lowestYear}
+                                        max={highestYear} />
+                                </div>
+                                range is {range[0]} - {range[1]}
                             </div>
                             <div className="col-md-9">
                                 <div>
@@ -121,16 +152,22 @@ const Books = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {
-                                                book && book.length > 0 ? searchBook.map((book: IBook, index: number) => (
+                                            {book && book.length > 0
+                                                ? searchBook.map((book: IBook, index: number) => (
                                                     <BookList key={book._id} book={book} index={index} refetch={refetch} />
-                                                )) : selectedGenre && selectedGenre.length > 0 ?
-                                                    genreFilter.map((book: IBook, index: number) => (
-                                                        <BookList key={book._id} book={book} index={index} refetch={refetch} />
-                                                    )) : data.data.map((book: IBook, index: number) => (
+                                                ))
+                                                : selectedGenre && selectedGenre.length > 0
+                                                    ? genreFilter.map((book: IBook, index: number) => (
                                                         <BookList key={book._id} book={book} index={index} refetch={refetch} />
                                                     ))
-                                            }
+                                                    : filterByYearRange.length > 0
+                                                        ? filterByYearRange.map((book: IBook, index: number) => (
+                                                            <BookList key={book._id} book={book} index={index} refetch={refetch} />
+                                                        ))
+                                                        : data?.data?.map((book: IBook, index: number) => (
+                                                            <BookList key={book._id} book={book} index={index} refetch={refetch} />
+                                                        ))}
+
                                         </tbody>
                                     </table>
                                 </div>

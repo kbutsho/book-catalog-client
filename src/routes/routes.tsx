@@ -10,7 +10,7 @@ import Books from "../pages/Books";
 import AddBook from "../pages/AddBook";
 import UpdateBook from "../pages/UpdateBook";
 import WishList from "../pages/WishList";
-import ReadingList from "../pages/ReadinList";
+import ReadingList from "../pages/ReadingList";
 
 const routes = createBrowserRouter([
     {

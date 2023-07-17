@@ -53,10 +53,15 @@ const UpdateBook = () => {
                         <div className="form">
                             <ToastContainer />
                             <h3 className="fw-bold mb-4">Update Book</h3>
+                            <label className="fw-bold">Title</label>
                             <input type="text" defaultValue={book.data.title} onChange={handleInputChange} placeholder="title" name="title" className="form-control my-3" />
+                            <label className="fw-bold">Author</label>
+                            <input type="text" defaultValue={book.data.author} onChange={handleInputChange} placeholder="author" name="author" className="form-control my-3" />
+                            <label className="fw-bold">Genre</label>
                             <input type="text" defaultValue={book.data.genre} onChange={handleInputChange} placeholder="genre" name="genre" className="form-control my-3" />
+                            <label className="fw-bold">Image URL</label>
                             <input type="text" defaultValue={book.data.image} onChange={handleInputChange} placeholder="image URL" name="image" className="form-control my-3" />
-                            <button onClick={handleSaveBook} className="btn btn-primary w-100">save</button>
+                            <button onClick={handleSaveBook} className="btn btn-primary w-100">update</button>
                             {updateBookLoading && <span className='btn btn-sm btn-danger w-100 mt-3 fw-bold'>please wait...</span>}
                         </div>
                     </div>

@@ -61,7 +61,7 @@ const BookDetails = () => {
                             <h4>All reviews</h4>
                             <ul>
                                 {reviews?.data?.map((r: IReview, index: number) => (
-                                    <li style={{ listStyle: "none" }} key={index}>{r.comment}</li>
+                                    <li key={index}>{r.comment}</li>
                                 ))}
                             </ul>
 

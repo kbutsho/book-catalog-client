@@ -31,7 +31,7 @@ const WishList = () => {
                                 <h5 className="mt-3">{book.title}</h5>
                                 <h6>Author: {book.author}</h6>
                                 <h6>Genre: {book.genre}</h6>
-                                <button onClick={() => removeFromWIshList(book)} className="btn btn-danger fw-bold mt-3 w-100">remove from wishlist</button>
+                                <button onClick={() => removeFromWIshList(book)} className="btn btn-danger fw-bold mt-3 w-100">finish reading</button>
                             </div>
                         </div>
                     ))}

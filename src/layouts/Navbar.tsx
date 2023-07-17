@@ -6,6 +6,8 @@ import swal from 'sweetalert';
 
 const Navbar = () => {
     const { email } = useAppSelector((state) => state.user);
+    const { books: wishList } = useAppSelector((state) => state.wishList);
+    const { books: readingList } = useAppSelector((state) => state.readingList);
     const dispatch = useAppDispatch();
     const handleLogout = () => {
         dispatch(removeLoginUser());
@@ -26,6 +28,8 @@ const Navbar = () => {
                         <Link className="nav-link" to="/books">All books</Link>
                         {email ? (
                             <>
+                                <Link className="nav-link " to="/wish-list">Wish list <span className="text-danger">{wishList.length > 0 ? wishList.length : ''}</span></Link>
+                                <Link className="nav-link " to="/reading-list">Reading list <span className="text-danger">{readingList.length > 0 ? readingList.length : ''}</span></Link>
                                 <Link className="nav-link " to="/add-book">Add Book</Link>
                                 <span className="nav-link fw-bold text-danger" style={{ cursor: "pointer" }} onClick={handleLogout}>Logout</span>
 

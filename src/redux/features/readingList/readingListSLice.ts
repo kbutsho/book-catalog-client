@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IBook } from "../../../types/globalTypes";
 import { toast } from "react-toastify";
+import swal from "sweetalert";
 
 interface IReadingList {
   books: IBook[];
@@ -28,7 +29,11 @@ const readingListSlice = createSlice({
       state.books = state.books.filter(
         (book) => book._id !== action.payload._id
       );
-      toast.success('book removed from reading list!');
+      if (state.books.length > 0) {
+        toast.success('book removed from reading list!');
+      } else {
+        swal('success', 'all book removed!', 'success')
+      }
       localStorage.setItem("readingList", JSON.stringify(state.books));
     }
   }

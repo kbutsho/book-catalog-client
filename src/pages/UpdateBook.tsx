@@ -9,7 +9,7 @@ import swal from "sweetalert";
 const UpdateBook = () => {
     const { id } = useParams();
     const { userId } = useAppSelector((state) => state.user);
-    const { data: book, isLoading } = useSingleBookQuery(id);
+    const { data: book, isLoading, refetch } = useSingleBookQuery(id);
     const navigate = useNavigate();
     const [bookData, setBookData] = useState({
         title: book?.data?.title,
@@ -37,7 +37,8 @@ const UpdateBook = () => {
                 toast.error((error as any).data.message);
             }
         } if (isSuccess) {
-            navigate('/books')
+            navigate(`/book/details/${id}`)
+            refetch();
             swal('success', data.message, 'success')
         }
     }, [isError, error, isSuccess, data])

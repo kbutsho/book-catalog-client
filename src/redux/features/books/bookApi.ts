@@ -3,7 +3,13 @@ import { api } from "../../api/apiSlice";
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
-      query: () => '/books'
+      query: () => `/books`
+    }),
+    getGenres: builder.query({
+      query: () => `/books/genre`
+    }),
+    getPublicationDates: builder.query({
+      query: () => `/books/publication-date`
     }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`
@@ -40,5 +46,7 @@ export const {
   useSingleBookQuery,
   useAddBookMutation,
   useDeleteBookMutation,
-  useUpdateBookMutation
+  useUpdateBookMutation,
+  useGetGenresQuery,
+  useGetPublicationDatesQuery
 } = bookApi;

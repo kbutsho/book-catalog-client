@@ -1,16 +1,18 @@
-import { useParams } from "react-router-dom";
-import { useSingleBookQuery } from "../redux/features/books/bookApi";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDeleteBookMutation, useSingleBookQuery } from "../redux/features/books/bookApi";
 import { useAddReviewMutation, useGetReviewsQuery } from "../redux/features/reviews/reviewApi";
 import { useState, useEffect } from 'react';
 import { useAppSelector } from "../redux/hook";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IReview } from "../types/globalTypes";
+import { Modal, ModalBody, ModalFooter } from "reactstrap";
+import swal from "sweetalert";
 
 const BookDetails = () => {
     const { id } = useParams();
     const { userId } = useAppSelector((state) => state.user);
-
+    const navigate = useNavigate()
     // get single book
     const { data: book, isLoading } = useSingleBookQuery(id);
 
@@ -41,6 +43,40 @@ const BookDetails = () => {
             }
         }
     }, [data, isSuccess, error])
+
+    // update book
+    const handelUpdateBook = (id: string) => {
+        if (userId) {
+            navigate(`/book/update/${id}`);
+        } else {
+            toast.error('login first!')
+        }
+    }
+
+    //delete book 
+    const [modal, setModal] = useState(false);
+    const toggleModal = () => {
+        setModal(!modal);
+    };
+    const [deleteBook, { isError: deleteIsError, isSuccess: deleteIsSuccess, error: deleteError, data: deleteData }] = useDeleteBookMutation();
+    const handleDeleteBook = (id: string) => {
+        const options = { id: id, data: { userId: userId } }
+        deleteBook(options);
+    }
+    useEffect(() => {
+        if (deleteData && deleteIsSuccess) {
+            toast.success(deleteData.message)
+            navigate(`/books`);
+            swal('success', 'book delete successfully!', 'success')
+            refetch();
+        }
+        if (deleteIsError) {
+            if (deleteError && "data" in deleteError) {
+                toast.error("you are not authorized of this book!");
+            }
+        }
+    }, [deleteData, deleteIsSuccess, deleteIsError, deleteError])
+
     return (
         <div className="container py-5">
             {isLoading ?
@@ -56,6 +92,21 @@ const BookDetails = () => {
                             <h6>Genre: {book.data.genre}</h6>
                             <h6>Author: {book.data.author}</h6>
                             <h6>Publication Date: {book.data.publicationDate.split('T')[0].split('-').reverse().join('-')}</h6>
+                            <button onClick={() => handelUpdateBook(book.data._id)} className="btn btn-primary btn-sm fw-bold mx-1 mt-3 px-4">Edit</button>
+                            <button onClick={toggleModal} className="btn btn-danger btn-sm fw-bold px-4 mt-3">Delete</button>
+                            {modal ? (
+                                <div>
+                                    <Modal isOpen={modal} className="modal-md" onClick={toggleModal} >
+                                        <ModalBody>
+                                            <h5 className='py-5 text-center'>Are you sure want to delete this book?</h5>
+                                        </ModalBody>
+                                        <ModalFooter>
+                                            <button onClick={() => handleDeleteBook(book.data._id)} className="btn btn-danger btn-sm fw-bold">Delete</button>
+                                            <button onClick={toggleModal} className='btn btn-sm btn-primary fw-bold'>Not Now</button>
+                                        </ModalFooter>
+                                    </Modal>
+                                </div>
+                            ) : null}
                         </div>
                         <div className="col-md-4">
                             <h4>All reviews</h4>

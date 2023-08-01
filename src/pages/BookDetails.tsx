@@ -56,7 +56,11 @@ const BookDetails = () => {
     //delete book 
     const [modal, setModal] = useState(false);
     const toggleModal = () => {
-        setModal(!modal);
+        if (userId) {
+            setModal(!modal);
+        } else {
+            toast.error('login first!')
+        }
     };
     const [deleteBook, { isError: deleteIsError, isSuccess: deleteIsSuccess, error: deleteError, data: deleteData }] = useDeleteBookMutation();
     const handleDeleteBook = (id: string) => {
